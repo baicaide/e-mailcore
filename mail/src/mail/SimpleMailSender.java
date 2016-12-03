@@ -17,15 +17,16 @@ import javax.mail.internet.MimeMultipart;
 
 public class SimpleMailSender 
 {
-    public boolean sendTextMail(MailSenderInfo mailInfo)
+    public static boolean sendTextMail(MailInfo mailInfo,Property property)
     {
           // 判断是否需要身份认证
           MyAuthenticator authenticator = null;
-          Properties pro = mailInfo.getProperties();
-          if (mailInfo.isValidate()) {
+          Properties pro = property.getProperties();
+          if (property.isValidate()) {
            // 如果需要身份认证，则创建一个密码验证器
            authenticator = new MyAuthenticator(mailInfo.getUserName(), mailInfo.getPassword());
           }
+          System.out.println(mailInfo.getUserName());
           // 根据邮件会话属性和密码验证器构造一个发送邮件的session
           Session sendMailSession = Session.getDefaultInstance(pro, authenticator);
           try {
@@ -54,12 +55,12 @@ public class SimpleMailSender
           return false;
          }
          
-         public static boolean sendHtmlMail(MailSenderInfo mailInfo) {
+         public static boolean sendHtmlMail(MailSenderInfo mailInfo,Property property) {
           // 判断是否需要身份认证
           MyAuthenticator authenticator = null;
-          Properties pro = mailInfo.getProperties();
+          Properties pro = property.getProperties();
           // 如果需要身份认证，则创建一个密码验证器
-          if (mailInfo.isValidate()) {
+          if (property.isValidate()) {
            authenticator = new MyAuthenticator(mailInfo.getUserName(), mailInfo.getPassword());
           }
           // 根据邮件会话属性和密码验证器构造一个发送邮件的session
