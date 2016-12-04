@@ -1,6 +1,13 @@
 package mail;
 
 public class SendMailInterface {
+	public static void proveInterface(String goalAddress,String vertifyAddress,String enume)
+	{
+		if (!(null == enume) && enume.equals("send"))
+		{
+			SendMailInterface.send(goalAddress, vertifyAddress);
+		}
+	}
     public static void send(String goalAddress,String vertifyAddress)
     {
         MailInfo mailInfo = MailInfo.MakeMailInfo(goalAddress,vertifyAddress);
